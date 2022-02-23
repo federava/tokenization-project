@@ -4,6 +4,7 @@ import MyTokenSale from "./contracts/MyTokenSale.json";
 import KycContract from "./contracts/KycContract.json";
 import getWeb3 from "./getWeb3";
 
+import logo from './logo.svg';
 import "./App.css";
 
 class App extends Component {
@@ -16,7 +17,10 @@ class App extends Component {
         alert("install metamask!!!")
       }
 
-      this.metamask = window.ethereum
+      // https://docs.metamask.io/guide/ethereum-provider.html#events
+      // It is not convenient to reload with chain change
+      window.ethereum.on('chainChanged', (_chainId) => window.location.reload());
+
 
       // Get network provider and web3 instance.
       this.web3 = await getWeb3();
@@ -69,8 +73,11 @@ class App extends Component {
         tokenDecimals: tokenDecimals, 
         blockNumber: lastBlockNumber
       }, this.updateUserTokens);
+
     } catch (error) {
       // Catch any errors for any of the above operations.
+
+      
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
       );
@@ -119,7 +126,7 @@ class App extends Component {
   // https://docs.metamask.io/guide/registering-your-token.html#code-free-example
   addTokenToMetamask = async () => {
     //console.log(this.state.tokenAddress)
-    console.log(window.ethereum)
+    console.table(window.ethereum)
     try {
    
       const wasAdded = await window.ethereum.request({
@@ -130,7 +137,7 @@ class App extends Component {
             address: this.state.tokenAddress, // The address that the token is at.
             symbol: this.state.tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
             decimals: this.state.tokenDecimals, // The number of decimals in the token
-            image: 'https://bafybeigrwzpsleen5mbz2qlnhjlltbz276252sdovg4oqmlusn42j5j56i.ipfs.infura-ipfs.io/?w=248&fit=crop&auto=format', // A string url of the token logo
+            image: 'https://bafybeihcobzlaezbhb3gxq2cxjvtmkeaeczuspn4mct4e6yj2jtaqkbequ.ipfs.infura-ipfs.io/?w=248&fit=crop&auto=format', // A string url of the token logo
           },
         },
       });
@@ -149,7 +156,10 @@ class App extends Component {
 
   render() {
     if (!this.state.loaded) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      return <div className="App">
+        <br></br>Loading Web3, accounts, and contract...<br></br>
+        <img src={logo} className="App-logo" alt="logo" />
+      </div>;
     }
     return (
       <div className="App">

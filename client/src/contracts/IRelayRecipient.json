@@ -1493,7 +1493,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-18T18:28:04.509Z",
+  "updatedAt": "2022-02-23T01:07:57.664Z",
   "devdoc": {
     "details": "Base interface for a contract that will be called via the GSN from {IRelayHub}. * TIP: You don't need to write an implementation yourself! Inherit from {GSNRecipient} instead.",
     "methods": {

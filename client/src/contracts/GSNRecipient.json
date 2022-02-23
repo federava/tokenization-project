@@ -809,10 +809,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        8972,
-                        8973
+                        9138,
+                        9139
                       ],
-                      "referencedDeclaration": 8973,
+                      "referencedDeclaration": 9139,
                       "src": "2033:7:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -921,10 +921,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        8972,
-                        8973
+                        9138,
+                        9139
                       ],
-                      "referencedDeclaration": 8973,
+                      "referencedDeclaration": 9139,
                       "src": "2127:7:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1138,7 +1138,7 @@
                     "name": "this",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 9015,
+                    "referencedDeclaration": 9189,
                     "src": "2736:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_GSNRecipient_$813",
@@ -1474,7 +1474,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8969,
+                        "referencedDeclaration": 9135,
                         "src": "3941:3:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1577,7 +1577,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8969,
+                            "referencedDeclaration": 9135,
                             "src": "3987:3:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1697,7 +1697,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8969,
+                        "referencedDeclaration": 9135,
                         "src": "4525:3:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1800,7 +1800,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8969,
+                            "referencedDeclaration": 9135,
                             "src": "4571:3:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1922,7 +1922,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8969,
+                            "referencedDeclaration": 9135,
                             "src": "5161:3:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2016,10 +2016,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        8972,
-                        8973
+                        9138,
+                        9139
                       ],
-                      "referencedDeclaration": 8973,
+                      "referencedDeclaration": 9139,
                       "src": "5153:7:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2307,7 +2307,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8969,
+                            "referencedDeclaration": 9135,
                             "src": "6061:3:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2401,10 +2401,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        8972,
-                        8973
+                        9138,
+                        9139
                       ],
-                      "referencedDeclaration": 8973,
+                      "referencedDeclaration": 9139,
                       "src": "6053:7:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -3721,7 +3721,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8969,
+                      "referencedDeclaration": 9135,
                       "src": "8919:3:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -3789,7 +3789,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8969,
+                        "referencedDeclaration": 9135,
                         "src": "8953:3:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -4059,7 +4059,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8969,
+                          "referencedDeclaration": 9135,
                           "src": "9597:3:6",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4287,7 +4287,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 8969,
+                                "referencedDeclaration": 9135,
                                 "src": "9768:3:6",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -5206,10 +5206,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                8972,
-                                8973
+                                9138,
+                                9139
                               ],
-                              "referencedDeclaration": 8973,
+                              "referencedDeclaration": 9139,
                               "type": "function (bool,string memory) pure",
                               "value": "require"
                             },
@@ -5376,10 +5376,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                8972,
-                                8973
+                                9138,
+                                9139
                               ],
-                              "referencedDeclaration": 8973,
+                              "referencedDeclaration": 9139,
                               "type": "function (bool,string memory) pure",
                               "value": "require"
                             },
@@ -5675,7 +5675,7 @@
                           "overloadedDeclarations": [
                             null
                           ],
-                          "referencedDeclaration": 9015,
+                          "referencedDeclaration": 9189,
                           "type": "contract GSNRecipient",
                           "value": "this"
                         },
@@ -6075,7 +6075,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 8969,
+                                  "referencedDeclaration": 9135,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -6132,7 +6132,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 8969,
+                                      "referencedDeclaration": 9135,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -6338,7 +6338,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 8969,
+                                  "referencedDeclaration": 9135,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -6395,7 +6395,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 8969,
+                                      "referencedDeclaration": 9135,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -6621,10 +6621,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                8972,
-                                8973
+                                9138,
+                                9139
                               ],
-                              "referencedDeclaration": 8973,
+                              "referencedDeclaration": 9139,
                               "type": "function (bool,string memory) pure",
                               "value": "require"
                             },
@@ -6665,7 +6665,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 8969,
+                                      "referencedDeclaration": 9135,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -7104,10 +7104,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                8972,
-                                8973
+                                9138,
+                                9139
                               ],
-                              "referencedDeclaration": 8973,
+                              "referencedDeclaration": 9139,
                               "type": "function (bool,string memory) pure",
                               "value": "require"
                             },
@@ -7148,7 +7148,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 8969,
+                                      "referencedDeclaration": 9135,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -8535,7 +8535,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 8969,
+                              "referencedDeclaration": 9135,
                               "type": "msg",
                               "value": "msg"
                             },
@@ -8617,7 +8617,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 8969,
+                                  "referencedDeclaration": 9135,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -8849,7 +8849,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 8969,
+                                      "referencedDeclaration": 9135,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -9227,7 +9227,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 8969,
+                                              "referencedDeclaration": 9135,
                                               "type": "msg",
                                               "value": "msg"
                                             },
@@ -9329,7 +9329,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-18T18:28:04.475Z",
+  "updatedAt": "2022-02-23T01:07:57.631Z",
   "devdoc": {
     "details": "Base GSN recipient contract: includes the {IRelayRecipient} interface and enables GSN support on all contracts in the inheritance tree. * TIP: This contract is abstract. The functions {IRelayRecipient-acceptRelayedCall}, {_preRelayedCall}, and {_postRelayedCall} are not implemented and must be provided by derived contracts. See the xref:ROOT:gsn-strategies.adoc#gsn-strategies[GSN strategies] for more information on how to use the pre-built {GSNRecipientSignature} and {GSNRecipientERC20Fee}, or how to write your own.",
     "methods": {

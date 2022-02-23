@@ -2,8 +2,9 @@ pragma solidity ^0.6.0;
 
 import "./Crowdsale.sol";
 import "./KycContract.sol";
+import "./openzeppelin/contracts/crowdsale/emission/MintedCrowdsale.sol";
 
-contract MyTokenSale is Crowdsale {
+contract MyTokenSale is MintedCrowdsale {
     KycContract kyc;
     constructor(
         uint256 rate,    // rate in TKNbits
@@ -11,6 +12,7 @@ contract MyTokenSale is Crowdsale {
         IERC20 token,
         KycContract _kyc
     )
+        MintedCrowdsale()
         Crowdsale(rate, wallet, token)
         public
     {

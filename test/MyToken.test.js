@@ -10,6 +10,18 @@ contract("Token Test", async (accounts) => {
     
     const [deployerAccount, recipient, anotherAccount] = accounts;
 
+    /*
+    it("should not have supply when deployed", async () => {
+        let instance = await Token.deployed()
+        let balance = await instance.totalSupply();
+        assert.equal(balance.toString(), "0")
+    })
+    */
+
+
+
+
+/*
     beforeEach(async () => {
         this.myToken = await Token.new(process.env.INITIAL_TOKENS)
     })
@@ -25,6 +37,7 @@ contract("Token Test", async (accounts) => {
         assert(balance.toString() == totalSupply.toString())
         //return expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(totalSupply);
     });
+    */
 /*
     it("is possible to send tokens between accounts", async () => {
         const sendTokens = 1;
