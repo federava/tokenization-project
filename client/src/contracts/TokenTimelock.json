@@ -2861,7 +2861,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-23T17:33:10.126Z",
+  "updatedAt": "2022-02-25T20:44:23.731Z",
   "devdoc": {
     "details": "A token holder contract that will allow a beneficiary to extract the tokens after a given release time. * Useful for simple vesting schedules like \"advisors get all of their tokens after 1 year\". * For a more complete vesting schedule, see {TokenVesting}.",
     "methods": {}
