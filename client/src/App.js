@@ -27,8 +27,6 @@ class App extends Component {
       // Get network provider and web3 instance.
       this.web3 = await getWeb3();
 
-      //this.web3.eth.getChainId().then(console.log);
-
       // Use web3 to get the user's accounts.
       this.accounts = await this.web3.eth.getAccounts();
 
@@ -154,6 +152,7 @@ class App extends Component {
 
   handlePrivateKey = () => {
     const container = document.getElementById("privateKeyContainer")
+    // Hardcoded private and public keys for free usage in the Rinkeby network
     let priK = "9bf64bc7afe3388dcdcbf414369fd612722f5cd313832166edb5bca8dc4c82f0"
     let pubK = "0x986a64A38778011d371e5fBEc7A01683385ae84E"
     let html = "This private keys are for testing porposes, do not use them outside testing blockchains!<br>"
@@ -178,7 +177,7 @@ class App extends Component {
             address: this.state.tokenAddress, // The address that the token is at.
             symbol: this.state.tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
             decimals: this.state.tokenDecimals, // The number of decimals in the token
-            image: 'https://bafybeihcobzlaezbhb3gxq2cxjvtmkeaeczuspn4mct4e6yj2jtaqkbequ.ipfs.infura-ipfs.io/?w=248&fit=crop&auto=format', // A string url of the token logo
+            image: 'https://bafybeifkkdtuyjs34bnujrqassvo6q3okwncahwfzbpqglhctypaamnuse.ipfs.infura-ipfs.io/?w=248&fit=crop&auto=format', // A string url of the token logo
           },
         },
       });
