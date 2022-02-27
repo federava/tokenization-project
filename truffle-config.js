@@ -22,19 +22,19 @@ module.exports = {
     },
     goerli_infura: {
       provider: function() {
-        return new HDWalletProvider(process.env.MNEMONIC, "https://goerli.infura.io/v3/05946a77c01c4409bec6ebd3c396384f", AccountIndex)
+        return new HDWalletProvider(process.env.MNEMONIC, "https://goerli.infura.io/v3/"+process.env.MNEMONIC, AccountIndex)
       },
       network_id: 5
     },
     ropsten_infura: {
       provider: function() {
-        return new HDWalletProvider(process.env.MNEMONIC, "https://ropsten.infura.io/v3/05946a77c01c4409bec6ebd3c396384f", AccountIndex)
+        return new HDWalletProvider(process.env.MNEMONIC, "https://ropsten.infura.io/v3/"+process.env.MNEMONIC, AccountIndex)
       },
       network_id: 3
     },
     rinkeby_infura: {
       provider: function() {
-        return new HDWalletProvider(process.env.MNEMONIC, "wss://rinkeby.infura.io/ws/v3/05946a77c01c4409bec6ebd3c396384f", AccountIndex)
+        return new HDWalletProvider(process.env.MNEMONIC, "wss://rinkeby.infura.io/ws/v3/"+process.env.MNEMONIC, AccountIndex)
       },
       network_id: 4
     }

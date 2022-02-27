@@ -10,6 +10,18 @@ import logo from './testtoken.png';
 import "./App.css";
 import "./Header.css"; 
 
+/*
+const networks = {
+  rinkeby: {
+    chainId: `0x${Number(4).toString(16)}`,
+    chainName: "Rinkeby"
+    nativeCurrency: {
+
+    }
+  }
+}
+*/
+
 class App extends Component {
   
   state = { loaded: false, tokenSaleAddress: null };
@@ -60,11 +72,21 @@ class App extends Component {
       const accounts = await this.web3.eth.getAccounts()
       const balance = await this.web3.eth.getBalance(accounts[0])
       const whitelisted = await this.kycInstance.methods.KycCompleted(accounts[0]).call()
+      
+
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
+
       this.listenToTokenTransfer();
+
       this.listenBlockNumber();
+
       window.ethereum.on('accountsChanged', () => this.handleAccountChange());
+
+      const testChainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+      console.log(testChainId)
       this.setState({
         kycAddress: "0x123..", 
         tokenSaleAddress: MyTokenSale.networks[this.networkId].address,
@@ -194,20 +216,48 @@ class App extends Component {
 
   }
 
+  // https://docs.metamask.io/guide/rpc-api.html#unrestricted-methods
+  // https://docs.metamask.io/guide/ethereum-provider.html#methods
+  // https://www.youtube.com/watch?v=QTcuJ9rdqME
+  handleSetChain = async () => {
+    console.log("set Rinkeby")
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{
+          chainId: '0x4'
+        }],
+      });
+    } catch (error) {
+
+    }
+
+  }
+
   render() {
     if (!this.state.loaded) {
-      return <div className="App">
-        <br></br>Loading Web3, accounts, and contract...<br></br>
-        <img src={logo} className="App-logo" alt="logo" />
-        <br></br>Connect to Rinkeby, smart contracts are deployed there.<br></br>
-      </div>;
+      return ( <div className="App">
+                <div className="header">
+                  <a className="logo">Logo</a>
+                  <div className="header-right">
+                    <a onClick={this.handleSetChain}>Select Rinkeby</a>
+                    <a >Tokens</a>
+                    <a >Balance</a>
+                    <a >Account</a>
+                  </div>
+                </div>
+                <br></br>Loading Web3, accounts, and contract...<br></br>
+                <img src={logo} className="App-logo, rotate" alt="logo" />
+                <br></br>Connect to Rinkeby, this project smart contracts are deployed there.<br></br>
+              </div>
+      )
     }
     return (
       <div className="App">
         <div className="header">
         <a className="logo">{this.state.tokenName}</a>
           <div className="header-right">
-            <a >ChainID: {this.state.chainId}</a>
+            <a >{this.state.chainId == 4 ? "Rinkeby" : "ChainID" + this.state.chainId}</a>
             <a onClick={this.addTokenToMetamask}>{this.state.userTokens} {this.state.tokenSymbol} <img src={logo} className="smallLogoHeader"/></a>
             <a >{Math.round(this.state.balance*1e-16)/100} ETH</a>
             <a onClick={this.handleClickAccount}>{this.state.accounts[0].substr(0,6)+"..."+this.state.accounts[0].substr(-4)}</a>
@@ -228,8 +278,8 @@ class App extends Component {
 
         <h2>Buy {this.state.tokenName} {this.state.tokenSymbol} tokens</h2>
         <p>If you are whitelisted you can buy tokens by sending wei to the crowdsale smart contract:</p>
-        
         <p>{this.state.tokenSaleAddress}</p>
+        <p>Or</p>
         <p>Amounts of tokens to buy: <input id="weiAmount" type="number" min="0" placeholder="10"/>
         <button type="button" onClick={this.handleBuyTokens}>Buy tokens</button></p>
         <br></br>
@@ -237,6 +287,7 @@ class App extends Component {
         <h2 id="privateKeyContainer" onClick={this.handlePrivateKey}>In case you need an already<br></br>
         whitelisted account, click <u>here</u></h2>
         <br></br>
+        <h2 >Need Rinkeby test ETH? Try <a href="https://faucets.chain.link/rinkeby" target="_blank"><u>Chainlink's faucet</u></a></h2>
         <br></br>
         <div className="blockDisplay">Block N° {this.state.blockNumber}</div>
       </div>
