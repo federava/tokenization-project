@@ -78,15 +78,10 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
 
-      this.listenToTokenTransfer();
-
       this.listenBlockNumber();
 
       window.ethereum.on('accountsChanged', () => this.handleAccountChange());
 
-      const testChainId = await window.ethereum.request({ method: 'eth_chainId' });
-
-      console.log(testChainId)
       this.setState({
         kycAddress: "0x123..", 
         tokenSaleAddress: MyTokenSale.networks[this.networkId].address,
@@ -103,7 +98,9 @@ class App extends Component {
         balance: balance,
         whitelisted: whitelisted,
         loaded: true,
-      }, this.updateUserTokens);
+      }, this.updateUserTokens );
+
+      this.listenToTokenTransfer();
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -123,7 +120,7 @@ class App extends Component {
 
   handleKycWhitelisting = async () => {
     if(this.web3.utils.isAddress(this.state.kycAddress)) {
-      await this.kycInstance.methods.setKycCompleted(this.state.kycAddress).send({from: this.accounts[0]})
+      await this.kycInstance.methods.setKycCompleted(this.state.kycAddress).send({from: this.state.accounts[0]})
       alert("Kyc for " + this.state.kycAddress + " completed")
     } else {
       alert("Please input a valid address, " + this.state.kycAddress + " is not an address.")
@@ -131,26 +128,38 @@ class App extends Component {
   }
 
   updateUserTokens = async () => {
-    let userTokens = await this.tokenInstance.methods.balanceOf(this.accounts[0]).call()
-    this.setState({userTokens: userTokens})
+    let userTokens = await this.tokenInstance.methods.balanceOf(this.state.accounts[0]).call()
+    const balance = await this.web3.eth.getBalance(this.state.accounts[0])
+    this.setState({userTokens: userTokens, balance: balance})
   }
 
   handleAccountChange = async () => {
-    this.updateUserTokens()
     const accounts = await this.web3.eth.getAccounts()
-    const balance = await this.web3.eth.getBalance(accounts[0])
     const whitelisted = await this.kycInstance.methods.KycCompleted(accounts[0]).call()
-    this.setState({accounts: accounts, balance: balance, whitelisted: whitelisted})
+    this.setState({accounts: accounts, whitelisted: whitelisted})
+    this.unsubscribeTokenTransfer()
+    this.listenToTokenTransfer()
+    this.updateUserTokens()
   }
 
   listenToTokenTransfer = async () => {
-    this.tokenInstance.events.Transfer({to: this.accounts[0]}).on("data", this.updateUserTokens)
+    let subscription = await this.tokenInstance.events.Transfer({to: this.state.accounts[0]}).on("data", this.updateUserTokens)
+    this.setState({subscription: subscription})
+  }
+
+  unsubscribeTokenTransfer = async () => {
+    await this.state.subscription.unsubscribe(function(error, success){
+      if(success) {
+        //console.log("unsubscribed")
+      }
+    })
+
   }
 
   handleBuyTokens = async () => {
     let amount = document.getElementById("weiAmount").value
     if(amount < 0) return alert("Value must be positive.")
-    await this.tokenSaleInstance.methods.buyTokens(this.accounts[0]).send({from:this.accounts[0], value: this.web3.utils.toWei(amount.toString(),"wei")})
+    await this.tokenSaleInstance.methods.buyTokens(this.state.accounts[0]).send({from:this.state.accounts[0], value: this.web3.utils.toWei(amount.toString(),"wei")})
     let totalSupply = await this.tokenInstance.methods.totalSupply().call()
     this.setState({totalSupply: totalSupply})
   }
@@ -179,8 +188,8 @@ class App extends Component {
     let pubK = "0x986a64A38778011d371e5fBEc7A01683385ae84E"
     let html = "This private keys are for testing porposes, do not use them outside testing blockchains!<br>"
     html += "Click the private or public key to copy to clipboard.<br><br>"
-    html += `<a onclick="navigator.clipboard.writeText('${priK}');alert('Private key copied to clipboard');">Private Keys: ${priK}</a><br>`
-    html += `<a onclick="navigator.clipboard.writeText('${pubK}');alert('Public key copied to clipboard');">Address: ${pubK}</a> `
+    html += `<a onclick="navigator.clipboard.writeText('${priK}');alert('Private key copied to clipboard');"><u>Private Keys:</u> ${priK}</a><br>`
+    html += `<a onclick="navigator.clipboard.writeText('${pubK}');alert('Public key copied to clipboard');"><u>Address:</u> ${pubK}</a> `
     container.innerHTML = html
   }
   
@@ -204,12 +213,6 @@ class App extends Component {
         },
       });
 
-      if (wasAdded) {
-        console.log('Thanks for your interest!');
-      } else {
-        console.log('Your loss!');
-      }
-
     } catch (error) {
       console.log(error);
     }
@@ -220,7 +223,6 @@ class App extends Component {
   // https://docs.metamask.io/guide/ethereum-provider.html#methods
   // https://www.youtube.com/watch?v=QTcuJ9rdqME
   handleSetChain = async () => {
-    console.log("set Rinkeby")
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
@@ -229,8 +231,12 @@ class App extends Component {
         }],
       });
     } catch (error) {
-
+      console.log(error)
     }
+  }
+
+  handleBlockColor() {
+    let blockDisplay = document.getElementById("blockDisplay")
 
   }
 
@@ -238,9 +244,8 @@ class App extends Component {
     if (!this.state.loaded) {
       return ( <div className="App">
                 <div className="header">
-                  <a className="logo">Logo</a>
                   <div className="header-right">
-                    <a onClick={this.handleSetChain}>Select Rinkeby</a>
+                    <a onClick={this.handleSetChain}><u>Select Rinkeby</u></a>
                     <a >Tokens</a>
                     <a >Balance</a>
                     <a >Account</a>
@@ -257,7 +262,7 @@ class App extends Component {
         <div className="header">
         <a className="logo">{this.state.tokenName}</a>
           <div className="header-right">
-            <a >{this.state.chainId == 4 ? "Rinkeby" : "ChainID" + this.state.chainId}</a>
+            <a href="https://rinkeby.etherscan.io/" target="_blank">Rinkeby</a>
             <a onClick={this.addTokenToMetamask}>{this.state.userTokens} {this.state.tokenSymbol} <img src={logo} className="smallLogoHeader"/></a>
             <a >{Math.round(this.state.balance*1e-16)/100} ETH</a>
             <a onClick={this.handleClickAccount}>{this.state.accounts[0].substr(0,6)+"..."+this.state.accounts[0].substr(-4)}</a>
@@ -265,13 +270,13 @@ class App extends Component {
         </div>
 
         <h1>{this.state.tokenName} token sale!</h1>
-        <p>Get your tokens today at rate of {this.state.rate} token per wei!</p>
+        <p>Mint your tokens today at rate of {this.state.rate} token per wei!</p>
         <h1>Total Supply: {this.state.totalSupply} <img src={logo} className="smallLogo"/></h1>
         <br></br>
         <h2>KYC whitelisting</h2>
         <p>Only the owner can add accounts to the whitelist: </p>
         <input type="text" name="kycAddress" value={this.state.kycAddress} onChange={this.handleInputChange}/>
-        <button type="button" onClick={this.handleKycWhitelisting}>Add to whitelist</button>
+        <a className="button" onClick={this.handleKycWhitelisting}>Add to whitelist</a>
         <p>Are you the KYC smart contract owner? {this.state.owner ? "YES" : "NO"}</p>
         <p>Is you account whitelisted? {this.state.whitelisted ? "YES" : "NO"}</p>
         <br></br>
@@ -280,16 +285,16 @@ class App extends Component {
         <p>If you are whitelisted you can buy tokens by sending wei to the crowdsale smart contract:</p>
         <p>{this.state.tokenSaleAddress}</p>
         <p>Or</p>
-        <p>Amounts of tokens to buy: <input id="weiAmount" type="number" min="0" placeholder="10"/>
-        <button type="button" onClick={this.handleBuyTokens}>Buy tokens</button></p>
+        <p>Amounts of tokens to buy: <input id="weiAmount" type="number" min="0" value="1"/>
+        <a className="button" onClick={this.handleBuyTokens}>Buy tokens</a></p>
         <br></br>
-
+        <h2 >Need Rinkeby test ETH? Try <a href="https://faucets.chain.link/rinkeby" target="_blank"><u>Chainlink's faucet</u></a></h2>
+        
         <h2 id="privateKeyContainer" onClick={this.handlePrivateKey}>In case you need an already<br></br>
         whitelisted account, click <u>here</u></h2>
         <br></br>
-        <h2 >Need Rinkeby test ETH? Try <a href="https://faucets.chain.link/rinkeby" target="_blank"><u>Chainlink's faucet</u></a></h2>
         <br></br>
-        <div className="blockDisplay">Block N° {this.state.blockNumber}</div>
+        <div id="blockDisplay" className="blockDisplay"><a href={"https://rinkeby.etherscan.io/block/"+this.state.blockNumber} target="_blank">Block N° {this.state.blockNumber}</a></div>
       </div>
     );
   }
